@@ -39,31 +39,67 @@ d1 $ stack [
 
 cps (100/60)
 
-d1 $ stack [
-  (1 ~>) $ sound "cy/8",
+d1 $
+--  (overlay $ (1 ~>) $ sound "cy/8") $
 --  whenmod 16 14 (trunc 0.4) $
-  whenmod 8 7 (overlay $ (0.32 ~>) $ s "k*2") $
-  s "[k sn]/2"
-  ]
+  stack [
+    whenmod 8 7 (overlay $ (0.32 ~>) $ s "k*2") $
+    whenmod 11 10 (density 3) $
+    s "k",
+    (0.5 ~>) $ s "sn/2"
+--    (1 ~>) $ s "sn/2"
+    ]
 
 d2 $
-  iter 4 $
+--  iter 4 $
   whenmod 16 15 (density 3) $
   smash 16 [0.25, 0.5] $
-  every 3 (append $ s "hh:1 hh") $
+--  every 3 (append $ s "hh:1 hh") $
   s "hh hh:2"
   # gain "0.6"
 
 d3 $
-  every 7 (0.25 ~>) $
-  (within (0, 0.5) $ gap 16) $
+--  whenmod 3 2 (density 1.5 . rev) $
+  (density 1.5) $
+--  chop 256 .
+  slow 8 $ sound "[vb:1 [~ vb:1] !? ~ vb [~ vb:1]? [~ vb] ~]"
+--  # speed "0.6"
+--  # end "0.2"
+  # cut "3"
+
+d3 $
+  s "[[vb vb:1] ~]/2"
+  # end "0.2"
+  # cut "3"
+
+d3 $
+  whenmod 3 2 (slow 2) $
+  (whenmod 4 2 $ density 3) $
+  s "[[vb vb:1] ~]/2"
+  # end (slow 1.4 "0.2 0.4")
+  # cut "3"
+  # speed (slow 2.5 "1 -1")
+
+hush
+
+d4 $
+  (1 ~>) $
+  within (0, 0.5) (density (5%3)) $
   every 2 (0.07 ~>) $
   (s $ samples "[[~ wb ~ ~] wb]/2" (slow 5 $ irand 5))
   # shape ((/3) <$> slow 16 saw1)
-  # vowel "[i o]*2"
-  # speed "0.8"
+  # speed "0.6"
+  # cut "4"
 
 d4 $
+  within (0, 0.5) (density (5%3)) $
+  every 2 (0.07 ~>) $
+  (s $ samples "[[~ wb ~ ~] wb]/2" (slow 5 $ irand 5))
+  # shape ((/3) <$> slow 16 saw1)
+--  # speed "0.6"
+  # cut "1"
+
+d5 $
 --  stut 4 0.6 1.25 $
   (0.5 <~) $
   slowspread density [1,2,0.5,2] $
