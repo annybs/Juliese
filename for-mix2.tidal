@@ -5,7 +5,7 @@ let every' n o f = when ((== (o-1)) . (`mod` n)) f
 d1 $ stack [
   (1 ~>) $ sound "cy/8",
   whenmod 8 7 (overlay $ (0.32 ~>) $ s "k*2") $
-  every' 12 2 (density 3) $
+--  every' 12 2 (density 3) $
   s "k",
   (0.5 ~>) $ s "sn/2"
   ]
@@ -28,26 +28,13 @@ d3 $
 
 d1 $ stack [
   whenmod 8 7 (overlay $ (0.32 ~>) $ s "k*2") $
-  every' 12 2 (density 3) $
+--  every' 12 2 (density 3) $
   s "k",
   (0.5 ~>) $ s "sn/2"
   ]
 
 d4 $
-  (0.18 <~) $
-  (# speed ((+0.8).(/2) <$> slow 4 saw1)) $
-  density 0.245 $
-  slowspread density [1, 2, 0.5, 2] $
-  gap 128 $
-  s "eg*2"
-  # gain "0.8"
-  # cut "4"
-
-d2 silence
-
-d4 $
-  (0.18 <~) $
-  every 2 (const silence) $
+  (1.18 <~) $
   (# speed ((+0.8).(/2) <$> slow 4 saw1)) $
   density 0.245 $
   slowspread density [1, 2, 0.5, 2] $
@@ -64,31 +51,46 @@ d1 $ stack [
   (1 ~>) $ s "sn/2"
 ]
 
+d2 silence
+
+{-
+d4 $
+  (1.18 <~) $
+  every 2 (const silence) $
+  (# speed ((+0.8).(/2) <$> slow 4 saw1)) $
+  density 0.245 $
+  slowspread density [1, 2, 0.5, 2] $
+  gap 128 $
+  s "eg*2"
+  # gain "0.8"
+  # cut "4"
+-}
+
 d5 $
   (0.32 ~>) $
   slow 4 . chop 256 $ sound "gt"
   # gain "0.7"
   # speed ((+0.8).(/3) <$> slow 8 sinewave1)
 
+{-
 d4 $
-  (0.18 <~) $
   (# speed ((+0.8).(/2) <$> slow 4 saw1)) $
-  slowspread density [1, 2, 0.5, 2] $
-  density 0.245 $
-  gap 128 $
+  density 0.98 $
+  chop 128 $
   s "[eg [~ eg] ! ~]/2"
   # gain "0.8"
   # cut "4"
+-}
 
 d1 $ stack [
-  (1 ~>) $ sound "cy/8",
   whenmod 8 7 (overlay $ (0.32 ~>) $ s "k*2") $
-  every' 12 2 (density 3) $
+--  every' 12 2 (density 3) $
   s "k",
   (1 ~>) $ s "sn/2"
   ]
 
 d4 silence
 d2 silence
+d5 silence
 
 hush
