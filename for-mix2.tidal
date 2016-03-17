@@ -2,10 +2,21 @@ cps (100/60)
 
 let every' n o f = when ((== (o-1)) . (`mod` n)) f
 
+hush
+
+d2 $
+--  iter 4 $
+--  (# pan (density 16 "0.25 0.75")) $
+  every' 16 16 (density 3) $
+--  smash 16 [0.25, 0.5] $
+--  every 3 (append $ s "hh:1 hh") $
+  s "hh hh:2"
+  # gain "0.6"
+
 d1 $ stack [
   (1 ~>) $ sound "cy/8",
-  whenmod 8 7 (overlay $ (0.32 ~>) $ s "k*2") $
---  every' 12 2 (density 3) $
+  every' 8 8 (overlay $ (0.32 ~>) $ s "k*2") $
+  every' 12 2 (density 3) $
   s "k",
   (0.5 ~>) $ s "sn/2"
   ]
@@ -25,16 +36,16 @@ d3 $
   s "[[vb vb:1] ~]/2"
   # end (slow 1.4 "0.2 0.4")
   # speed (slow 2.5 "1 -1")
+  # vowel "e o" -- woot
 
 d1 $ stack [
-  whenmod 8 7 (overlay $ (0.32 ~>) $ s "k*2") $
---  every' 12 2 (density 3) $
+  every' 8 8 (overlay $ (0.32 ~>) $ s "k*2") $
+  every' 12 2 (density 3) $
   s "k",
   (0.5 ~>) $ s "sn/2"
   ]
 
 d4 $
-  (1.18 <~) $
   (# speed ((+0.8).(/2) <$> slow 4 saw1)) $
   density 0.245 $
   slowspread density [1, 2, 0.5, 2] $
@@ -43,19 +54,17 @@ d4 $
   # gain "0.8"
   # cut "4"
 
+d2 silence
+
 d1 $ stack [
   every' 8 7 (overlay $ (0.32 ~>) $ s "k") $
   s "[k ~ k*2 ~]/4",
-  every' 32 31 (const $ (0.07 ~>) $ s "[~ ~ ~ sn]") $
-  every' 16 16 (const $ s "sn*2") $
+  every' 16 16 (overlay $ (0.82 ~>) $ s "sn") $
   (1 ~>) $ s "sn/2"
 ]
 
-d2 silence
-
-{-
 d4 $
-  (1.18 <~) $
+  (0.18 <~) $
   every 2 (const silence) $
   (# speed ((+0.8).(/2) <$> slow 4 saw1)) $
   density 0.245 $
@@ -64,33 +73,29 @@ d4 $
   s "eg*2"
   # gain "0.8"
   # cut "4"
--}
 
 d5 $
-  (0.32 ~>) $
-  slow 4 . chop 256 $ sound "gt"
-  # gain "0.7"
-  # speed ((+0.8).(/3) <$> slow 8 sinewave1)
-
-{-
-d4 $
   (# speed ((+0.8).(/2) <$> slow 4 saw1)) $
-  density 0.98 $
+  density 0.98 $ -- snap out of this into density 1, or vice versa?
   chop 128 $
-  s "[eg [~ eg] ! ~]/2"
-  # gain "0.8"
+  s "[gt [~ gt] ! ~]/2"
+  # gain "0.7"
   # cut "4"
--}
 
 d1 $ stack [
-  whenmod 8 7 (overlay $ (0.32 ~>) $ s "k*2") $
---  every' 12 2 (density 3) $
+  every' 8 8 (overlay $ (0.32 ~>) $ s "k*2") $
+  every' 12 2 (density 3) $
   s "k",
   (1 ~>) $ s "sn/2"
   ]
 
 d4 silence
-d2 silence
 d5 silence
+
+-- fast!
+d1 $ stack [
+  every' 8 8 (overlay $ (0.25 ~>) $ s "k*2") $ s "k",
+  (0.5 ~>) $ s "sn"
+  ]
 
 hush
