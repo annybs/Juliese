@@ -90,22 +90,28 @@ d3 $
 
 d4 $
   density 0.25 $
-  gap 128 $
-  s "eg*2"
-  # gain "0.7" -- fade up to 0.8
+  gap 128 $ s "eg*2"
+  # gain "0.7" -- fade up to 0.7
   # cut "4"
 
 d4 $
   (# speed ((+0.8).(/2) <$> slow 4 saw1)) $
   density 0.25 $
-  gap 128 $
-  s "eg*2"
+  gap 128 $ s "eg*2"
   # gain "0.7"
   # cut "4"
 
 d4 $
   (# speed ((+0.8).(/2) <$> slow 4 saw1)) $
   density 0.25 $
+  slowspread density [1, 2, 0.5, 2] $
+  gap 128 $ s "eg*2"
+  # gain "0.7"
+  # cut "4"
+
+d4 $
+  (# speed ((+0.8).(/2) <$> slow 4 saw1)) $
+  density 0.245 $
   slowspread density [1, 2, 0.5, 2] $
   gap 128 $
   s "eg*2"
@@ -119,8 +125,7 @@ d4 $
   (# speed ((+0.8).(/2) <$> slow 4 saw1)) $
   density 0.245 $
   slowspread density [1, 2, 0.5, 2] $
-  gap 128 $
-  s "eg*2"
+  gap 128 $ s "eg*2"
   # gain "0.8"
   # cut "4"
 
@@ -132,23 +137,28 @@ d1 $ stack [
   ]
 
 d5 $
-  chop 128 $
-  s "[gt [~ gt] ! ~]/2"
+  chop 128 $ s "[gt [~ gt] ! ~]/2"
   # gain "0.7"
   # cut "4"
 
 d5 $
   density 0.98 $
-  chop 128 $
-  s "[gt [~ gt] ! ~]/2"
+  chop 128 $ s "[gt [~ gt] ! ~]/2"
   # gain "0.7"
   # cut "4"
 
 d5 $
   (# speed ((+0.8).(/2) <$> slow 4 saw1)) $
   density 0.98 $
-  chop 128 $
-  s "[gt [~ gt] ! ~]/2"
+  chop 128 $ s "[gt [~ gt] ! ~]/2"
+  # gain "0.7"
+  # cut "4"
+
+d4 $
+  (# speed ((+0.8).(/2) <$> slow 4 saw1)) $
+  density 0.245 $
+  slowspread density [1, 2, 0.5, 2] $
+  gap 128 $ s "eg*2"
   # gain "0.7"
   # cut "4"
 
@@ -159,7 +169,7 @@ d1 $ stack [
   (1 ~>) $ s "sn/2"
   ]
 
-d4 silence
+mapM_ ($ silence) [d4,d5]
 
 -- fast!
 d1 $ stack [
