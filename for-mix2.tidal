@@ -4,17 +4,29 @@ let every' n o f = when ((== (o-1)) . (`mod` n)) f
 
 hush
 
-d1 $ s "k"
+d3 $
+  s "[[vb vb:1] ~]/2"
+  # speed (slow 2.5 "1 -1")
+  # vowel "e o"
 
 d3 $
   s "[[vb vb:1] ~]/2"
   # end (slow 1.4 "0.2 0.4")
+--  # speed (slow 2.5 "1 -1") -- not this, but don't delete it. comes back
   # vowel "e o"
 
 d2 $
   smash 16 [0.25, 0.5] $
   s "hh hh:2"
   # gain "0.6"
+
+d1 $ s "k"
+
+d3 $
+  s "[[vb vb:1] ~]/2"
+  # end (slow 1.4 "0.2 0.4")
+  # speed (slow 2.5 "1 -1")
+  # vowel "e o"
 
 d1 $ every' 8 8 (overlay $ (0.32 ~>) $ s "k*2") $ s "k"
 
@@ -30,6 +42,7 @@ d1 $ stack [
   ]
 
 d3 $
+  whenmod 3 2 (slow 2) $
   s "[[vb vb:1] ~]/2"
   # end (slow 1.4 "0.2 0.4")
   # speed (slow 2.5 "1 -1")
@@ -40,13 +53,6 @@ d1 $ stack [
   every' 8 8 (overlay $ (0.32 ~>) $ s "k*2") $ s "k",
   (0.5 ~>) $ s "sn/2"
   ]
-
-d3 $
-  whenmod 3 2 (slow 2) $
-  s "[[vb vb:1] ~]/2"
-  # end (slow 1.4 "0.2 0.4")
-  # speed (slow 2.5 "1 -1")
-  # vowel "e o"
 
 d2 $
   whenmod 16 15 (density 3) $
@@ -80,6 +86,11 @@ d1 $ stack [
   (0.5 ~>) $ s "sn/2"
   ]
 
+d6 $
+  slow 4 . striate 128 $
+  s (samples "udu" (slow 4 $ irand 4))
+  # gain "0.8"
+
 d3 $
   whenmod 3 2 (slow 2) $
   (whenmod 4 2 $ density 3) $
@@ -109,16 +120,22 @@ d4 $
   # gain "0.7"
   # cut "4"
 
+d6 $
+  within (0, 0.5) rev $
+  slow 4 . striate 128 $
+  s (samples "udu" (slow 4 $ irand 4))
+  # gain "0.8"
+
 d4 $
   (# speed ((+0.8).(/2) <$> slow 4 saw1)) $
   density 0.245 $
   slowspread density [1, 2, 0.5, 2] $
   gap 128 $
   s "eg*2"
-  # gain "0.7"
+  # gain "0.8"
   # cut "4"
 
-d2 silence
+mapM_ ($ silence) [d2,d3]
 
 d4 $
   (0.18 <~) $ every 2 (const silence) $
@@ -129,38 +146,78 @@ d4 $
   # gain "0.8"
   # cut "4"
 
-d1 $ stack [
-  every' 8 7 (overlay $ (0.32 ~>) $ s "k") $
-  s "[k ~ k*2 ~]/4",
-  every' 16 16 (overlay $ (0.82 ~>) $ s "sn") $
-  (1 ~>) $ s "sn/2"
-  ]
+d6 $
+  (whenmod 3 2 $ slow 2) $
+  within (0, 0.5) rev $
+  slow 4 . striate 128 $
+  s (samples "udu" (slow 4 $ irand 4))
+  # gain "0.8"
 
 d5 $
   chop 128 $ s "[gt [~ gt] ! ~]/2"
-  # gain "0.7"
+  # gain "0.8"
   # cut "4"
+
+d6 $
+  (whenmod 3 2 $ slow 2) $
+  (whenmod 5 3 $ brak) $
+  within (0, 0.5) rev $
+  slow 4 . striate 128 $
+  s (samples "udu" (slow 4 $ irand 4))
+  # gain "0.8"
 
 d5 $
   density 0.98 $
   chop 128 $ s "[gt [~ gt] ! ~]/2"
-  # gain "0.7"
+  # gain "0.8"
   # cut "4"
 
-d5 $
-  (# speed ((+0.8).(/2) <$> slow 4 saw1)) $
-  density 0.98 $
-  chop 128 $ s "[gt [~ gt] ! ~]/2"
-  # gain "0.7"
-  # cut "4"
+d3 $
+  (whenmod 3 2 $ slow 2) $
+  (whenmod 4 2 $ density 3) $
+  s "[[vb vb:1] ~]/2"
+  # end (slow 1.4 "0.2 0.4")
+  # speed (slow 2.5 "1 -1")
+  # vowel "e o"
 
 d4 $
+  (0.18 <~) $
   (# speed ((+0.8).(/2) <$> slow 4 saw1)) $
   density 0.245 $
   slowspread density [1, 2, 0.5, 2] $
   gap 128 $ s "eg*2"
   # gain "0.7"
   # cut "4"
+
+d2 $
+  iter 4 $
+  (# pan (density 16 "0.25 0.75")) $
+  whenmod 16 15 (density 3) $
+  smash 16 [0.25, 0.5] $
+  every 3 (append $ s "hh:1 hh") $
+  s "hh hh:2"
+  # gain "0.6"
+
+d5 $
+  density 0.98 $
+  chop 128 $ s "[gt [~ gt] ! ~]/2"
+  # gain "0.8"
+  # cut "4"
+
+d4 silence
+
+mapM_ ($ silence) [d2,d5] -- silence
+
+d3 $
+  within (0.5, 1) (slow (4%3) . brak) $
+  (whenmod 4 2 $ density 3) $
+  (whenmod 3 2 $ slow 2) $
+  s "[[vb vb:1] ~]/2"
+  # end (slow 1.4 "0.2 0.4")
+  # speed (slow 2.5 "1 -1")
+  # vowel "e o"
+
+-- put off this d1 transition to much later, the first drum loop is way funkier
 
 d1 $ stack [
   every' 8 8 (overlay $ (0.32 ~>) $ s "k*2") $
@@ -169,12 +226,19 @@ d1 $ stack [
   (1 ~>) $ s "sn/2"
   ]
 
-mapM_ ($ silence) [d4,d5]
-
--- fast!
 d1 $ stack [
-  every' 8 8 (overlay $ (0.32 ~>) $ s "k*2") $ s "k",
-  (0.5 ~>) $ s "sn"
+  every' 8 7 (overlay $ (0.32 ~>) $ s "k") $
+  s "[k ~ k*2 ~]/4",
+  every' 16 16 (overlay $ (0.82 ~>) $ s "sn") $
+  (1 ~>) $ s "sn/2"
   ]
+
+d3 $
+  whenmod 3 2 (slow 2) $
+  (whenmod 4 2 $ density 3) $
+  s "[[vb vb:1] ~]/2"
+  # end (slow 1.4 "0.2 0.4")
+  # speed (slow 2.5 "1 -1")
+  # vowel "e o"
 
 hush
