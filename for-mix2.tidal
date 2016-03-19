@@ -135,6 +135,21 @@ d4 $
   # gain "0.8"
   # cut "4"
 
+d1 $ stack [
+  (1 ~>) $ sound "cy/8",
+  every' 8 8 (overlay $ (0.32 ~>) $ s "k*2") $
+  every' 12 2 (density 3) $
+  s "k",
+  (0.5 ~>) $ s "sn/2"
+  ]
+
+d1 $ stack [
+  every' 8 8 (overlay $ (0.32 ~>) $ s "k*2") $
+  every' 12 2 (density 3) $
+  s "k",
+  (0.5 ~>) $ s "sn/2"
+  ]
+
 mapM_ ($ silence) [d2,d3]
 
 d4 $
@@ -180,6 +195,13 @@ d3 $
   # speed (slow 2.5 "1 -1")
   # vowel "e o"
 
+-- do more
+d5 $
+  density 0.98 $
+  chop 128 $ s "[gt [~ gt] ! ~]/2"
+  # gain "0.8"
+  # cut "4"
+
 d4 $
   (0.18 <~) $
   (# speed ((+0.8).(/2) <$> slow 4 saw1)) $
@@ -198,15 +220,7 @@ d2 $
   s "hh hh:2"
   # gain "0.6"
 
-d5 $
-  density 0.98 $
-  chop 128 $ s "[gt [~ gt] ! ~]/2"
-  # gain "0.8"
-  # cut "4"
-
 d4 silence
-
-mapM_ ($ silence) [d2,d5] -- silence
 
 d3 $
   within (0.5, 1) (slow (4%3) . brak) $
@@ -217,14 +231,13 @@ d3 $
   # speed (slow 2.5 "1 -1")
   # vowel "e o"
 
--- put off this d1 transition to much later, the first drum loop is way funkier
-
 d1 $ stack [
   every' 8 8 (overlay $ (0.32 ~>) $ s "k*2") $
-  every' 12 2 (density 3) $
   s "k",
   (1 ~>) $ s "sn/2"
   ]
+
+mapM_ ($ silence) [d2,d5]
 
 d1 $ stack [
   every' 8 7 (overlay $ (0.32 ~>) $ s "k") $
