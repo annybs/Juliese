@@ -48,11 +48,26 @@ d3 $
   # speed (slow 2.5 "1 -1")
   # vowel "e o"
 
+d3 $
+  whenmod 3 2 (slow 2) $
+  (whenmod 4 2 $ density 3) $
+  s "[[vb vb:1] ~]/2"
+  # end (slow 1.4 "0.2 0.4")
+  # speed (slow 2.5 "1 -1")
+  # vowel "e o"
+
 d1 $ stack [
   (1 ~>) $ sound "cy/8",
   every' 8 8 (overlay $ (0.32 ~>) $ s "k*2") $ s "k",
   (0.5 ~>) $ s "sn/2"
   ]
+
+d7 $
+  slowspread ($) [id, slow 2] $
+  slow 16 $ gap 48 $ s "pc:1"
+  # gain "0.9"
+  # cut "7"
+  # speed "[1 0.7]"
 
 d2 $
   whenmod 16 15 (density 3) $
@@ -69,7 +84,15 @@ d1 $ stack [
   (0.5 ~>) $ s "sn/2"
   ]
 
--- these two quickly
+d1 $ stack [
+  every' 8 8 (overlay $ (0.32 ~>) $ s "k*2") $
+  every' 12 2 (density 3) $
+  s "k",
+  (0.5 ~>) $ s "sn/2"
+  ]
+
+d7 silence
+
 d2 $
   iter 4 $
   (# pan (density 16 "0.25 0.75")) $
@@ -79,26 +102,11 @@ d2 $
   s "hh hh:2"
   # gain "0.6"
 
-d1 $ stack [
-  every' 8 8 (overlay $ (0.32 ~>) $ s "k*2") $
-  every' 12 2 (density 3) $
-  s "k",
-  (0.5 ~>) $ s "sn/2"
-  ]
-
 d6 $
   slow 4 . chop 128 $
   s (samples "udu" (slow 4 $ irand 4))
   # gain "0.8"
   # cut "6"
-
-d3 $
-  whenmod 3 2 (slow 2) $
-  (whenmod 4 2 $ density 3) $
-  s "[[vb vb:1] ~]/2"
-  # end (slow 1.4 "0.2 0.4")
-  # speed (slow 2.5 "1 -1")
-  # vowel "e o"
 
 d4 $
   density 0.25 $
@@ -171,11 +179,12 @@ d6 $
   # gain "0.8"
   # cut "6"
 
-d5 $
-  chop 128 $ s "[gt [~ gt] ! ~]/2"
---  # gain "0.8"
- # gain "0.8" -- fade up to 0.8
-  # cut "5"
+d7 $
+  slowspread ($) [id, slow 2] $
+  slow 16 $ gap 48 $ s "[pc pc:1]"
+  # gain "0.8"
+  # cut "7"
+  # speed "[1 0.7]"
 
 d6 $
   (every' 5 3 $ brak) $
@@ -186,9 +195,38 @@ d6 $
   # gain "0.8"
   # cut "6"
 
+d7 $
+  slowspread ($) [rev, id, brak, (0.25 ~>), id] $
+  slowspread ($) [id, slow 2] $
+  slow 16 $ gap 48 $ s "[pc pc:1]"
+  # gain "0.8"
+  # cut "7"
+  # speed "[1 0.7]"
+
+d7 $
+  whenmod 7 5 (density 1.25) $
+  slowspread ($) [rev, id, brak, (0.25 ~>), id] $
+  slowspread ($) [id, slow 2] $
+  slow 16 $ gap 48 $ s "[pc pc:1]"
+  # gain "0.8"
+  # cut "7"
+  # speed "[1 0.7]"
+
 d5 $
   chop 128 $ s "[gt [~ gt] ! ~]/2"
   # gain "0.8" -- fade up to 0.8
+  # cut "5"
+
+d5 $
+  chop 128 $ s "[gt [~ gt] ! ~]/2"
+  # gain "0.8" -- fade up to 0.8
+  # cut "5"
+  # speed ((+1).(/4) <$> slow 1.95 sinewave1)
+
+d5 $
+  density 0.98 $
+  chop 128 $ s "[gt [~ gt] ! ~]/2"
+  # gain "0.8"
   # cut "5"
   # speed ((+1).(/4) <$> slow 1.95 sinewave1)
 
@@ -199,13 +237,6 @@ d3 $
   # end (slow 1.4 "0.2 0.4")
   # speed (slow 2.5 "1 -1")
   # vowel "e o"
-
-d5 $
-  density 0.98 $
-  chop 128 $ s "[gt [~ gt] ! ~]/2"
-  # gain "0.8"
-  # cut "5"
-  # speed ((+1).(/4) <$> slow 1.95 sinewave1)
 
 d4 $
   (0.18 <~) $
@@ -216,15 +247,6 @@ d4 $
   # gain "0.8"
   # cut "4"
 
-d2 $
-  iter 4 $
-  (# pan (density 16 "0.25 0.75")) $
-  whenmod 16 15 (density 3) $
-  smash 16 [0.25, 0.5] $
-  every 3 (append $ s "hh:1 hh") $
-  s "hh hh:2"
-  # gain "0.6"
-
 d3 $
   within (0.5, 1) (slow (4%3) . brak) $
   (whenmod 4 2 $ density 3) $
@@ -234,14 +256,17 @@ d3 $
   # speed (slow 2.5 "1 -1")
   # vowel "e o"
 
-d4 silence
-
 d1 $ stack [
   every' 8 7 (overlay $ (0.32 ~>) $ s "k") $
   s "[k ~ k*2 ~]/4",
   every' 16 16 (overlay $ (0.82 ~>) $ s "sn") $
   (1 ~>) $ s "sn/2"
   ]
+
+d4 silence
+
+d8 $ slow 16 . gap 64 $ s "pclow"
+  # gain "0.86"
 
 {-
 d1 $ stack [
@@ -259,6 +284,25 @@ d3 $
   # speed (slow 2.5 "1 -1")
   # vowel "e o"
 
-mapM_ ($ silence) [d2,d5]
+d5 silence
+
+d7 $
+  stut 4 0.8 0.5 $
+  whenmod 7 5 (density 1.25) $
+  slowspread ($) [rev, id, brak, (0.25 ~>), id] $
+  slowspread ($) [id, slow 2] $
+  slow 16 $ gap 48 $ s "[pc pc:1]"
+  # gain "0.8"
+  # cut "7"
+  # speed "[1 0.7]"
+
+d2 $
+  iter 4 $
+  (# pan (density 16 "0.25 0.75")) $
+  whenmod 16 15 (density 3) $
+  smash 16 [0.25, 0.5] $
+  every 3 (append $ s "hh:1 hh") $
+  s "hh hh:2"
+  # gain "0.6"
 
 hush
