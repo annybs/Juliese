@@ -62,13 +62,6 @@ d1 $ stack [
   (0.5 ~>) $ s "sn/2"
   ]
 
-d7 $
-  slowspread ($) [id, slow 2] $
-  slow 16 $ gap 48 $ s "pc:1"
-  # gain "0.9"
-  # cut "7"
-  # speed "[1 0.7]"
-
 d2 $
   whenmod 16 15 (density 3) $
   smash 16 [0.25, 0.5] $
@@ -90,8 +83,6 @@ d1 $ stack [
   s "k",
   (0.5 ~>) $ s "sn/2"
   ]
-
-d7 silence
 
 d2 $
   iter 4 $
@@ -155,13 +146,6 @@ d1 $ stack [
 
 mapM_ ($ silence) [d2,d3]
 
-d1 $ stack [
-  every' 8 8 (overlay $ (0.32 ~>) $ s "k*2") $
-  every' 12 2 (density 3) $
-  s "k",
-  (0.5 ~>) $ s "sn/2"
-  ]
-
 d4 $
   (0.18 <~) $ every 2 (const silence) $
   (# speed ((+0.8).(/2) <$> slow 4 saw1)) $
@@ -170,6 +154,26 @@ d4 $
   gap 128 $ s "eg*2"
   # gain "0.8"
   # cut "4"
+
+d1 $ stack [
+  every' 8 8 (overlay $ (0.32 ~>) $ s "k*2") $
+  every' 12 2 (density 3) $
+  s "k",
+  (0.5 ~>) $ s "sn/2"
+  ]
+
+d7 $
+  slow 16 $ gap 48 $ s "pc:1"
+  # gain "0.7"
+  # cut "7"
+  # speed "[1 0.7]"
+
+d7 $
+  slowspread ($) [id, slow 2] $
+  slow 16 $ gap 48 $ s "pc:1"
+  # gain "0.7"
+  # cut "7"
+  # speed "[1 0.7]"
 
 d6 $
   (every' 3 2 . sometimesBy 0.5 $ density (4%3)) $
@@ -182,7 +186,7 @@ d6 $
 d7 $
   slowspread ($) [id, slow 2] $
   slow 16 $ gap 48 $ s "[pc pc:1]"
-  # gain "0.8"
+  # gain "0.7"
   # cut "7"
   # speed "[1 0.7]"
 
@@ -199,16 +203,7 @@ d7 $
   slowspread ($) [rev, id, brak, (0.25 ~>), id] $
   slowspread ($) [id, slow 2] $
   slow 16 $ gap 48 $ s "[pc pc:1]"
-  # gain "0.8"
-  # cut "7"
-  # speed "[1 0.7]"
-
-d7 $
-  whenmod 7 5 (density 1.25) $
-  slowspread ($) [rev, id, brak, (0.25 ~>), id] $
-  slowspread ($) [id, slow 2] $
-  slow 16 $ gap 48 $ s "[pc pc:1]"
-  # gain "0.8"
+  # gain "0.7"
   # cut "7"
   # speed "[1 0.7]"
 
@@ -222,6 +217,15 @@ d5 $
   # gain "0.8" -- fade up to 0.8
   # cut "5"
   # speed ((+1).(/4) <$> slow 1.95 sinewave1)
+
+d7 $
+  whenmod 7 5 (density 1.25) $
+  slowspread ($) [rev, id, brak, (0.25 ~>), id] $
+  slowspread ($) [id, slow 2] $
+  slow 16 $ gap 48 $ s "[pc pc:1]"
+  # gain "0.7"
+  # cut "7"
+  # speed "[1 0.7]"
 
 d5 $
   density 0.98 $
@@ -292,7 +296,7 @@ d7 $
   slowspread ($) [rev, id, brak, (0.25 ~>), id] $
   slowspread ($) [id, slow 2] $
   slow 16 $ gap 48 $ s "[pc pc:1]"
-  # gain "0.8"
+  # gain "0.7"
   # cut "7"
   # speed "[1 0.7]"
 
