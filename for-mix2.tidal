@@ -84,10 +84,10 @@ d2 $ whenmod 16 15 (density 3) $ hhb True
 d2 $ (# pan (density 16 "0.25 0.75")) $ whenmod 16 15 (density 3) $ hhb True
 
 d1 $ overlay ((1 ~>) $ s "cy/8") $
-  overlay ((0.5 ~>) $ s "sn/2") $ every' 12 2 (density 3) $ morek $ s "k"
+  overlay ((0.5 ~>) $ s "sn/2") $ morek $ s "k"
 
 d2 $ iter 4 $ (# pan (density 16 "0.25 0.75")) $ whenmod 16 15 (density 3) $ hhb True
-d1 $ overlay ((0.5 ~>) $ s "sn/2") $ every' 12 2 (density 3) $ morek $ s "k"
+d1 $ overlay ((0.5 ~>) $ s "sn/2") $ morek $ s "k"
 
 d6 $ ududu
 
@@ -108,7 +108,7 @@ d4 $ (# speed ((+0.8).(/2) <$> slow 4 saw1)) $
   slowspread density [1, 2, 0.5, 2] $ eg "0.8"
 
 d1 $ overlay ((1 ~>) $ s "cy/8") $
-  overlay ((0.5 ~>) $ s "sn/2") $ every' 12 2 (density 3) $ morek $ s "k"
+  overlay ((0.5 ~>) $ s "sn/2") $ morek $ s "k"
 
 mapM_ ($ silence) [d2,d3]
 
@@ -118,6 +118,7 @@ d4 $ (0.18 <~) $ every 2 (const silence) $
   density 0.245 $
   slowspread density [1, 2, 0.5, 2] $ eg "0.8"
 
+d1 $ overlay ((0.5 ~>) $ s "sn/2") $ morek $ s "k"
 d1 $ overlay ((0.5 ~>) $ s "sn/2") $ every' 12 2 (density 3) $ morek $ s "k"
 
 d7 $ pcbeep
@@ -139,7 +140,8 @@ d7 $ whenmod 7 5 (density 1.25) $
 
 d3 $ whenmod 4 2 (density 3) $ whenmod 3 2 (slow 2) $ bassbass'
 
-d4 $ (0.18 <~) $ --every 2 (const silence) $
+-- bye const
+d4 $ (0.18 <~) $
   (# speed ((+0.8).(/2) <$> slow 4 saw1)) $
   density 0.245 $
   slowspread density [1, 2, 0.5, 2] $ eg "0.8"
@@ -159,6 +161,7 @@ d5 $ density 0.98 $ gt "0.75"
 
 d2 $ iter 4 $ (# pan (density 16 "0.25 0.75")) $ whenmod 16 15 (density 3) $ hhb True
 
+-- outro drum line, could be variabl...ized cause no way i can type this all out live
 d1 $ stack [
   every' 8 7 (overlay $ (0.32 ~>) $ s "k") $ s "[k ~ k*2 ~]/4",
   every' 16 16 (overlay $ (0.82 ~>) $ s "sn") $ (1 ~>) $ s "sn/2"
@@ -179,5 +182,5 @@ scratch area to keep stuff that's interesting but maybe doesn't fit in
 -}
 
 -- totally different drum line, feelwise. even though it's nearly the same
--- kinda don't like it but not gonna chuck it yet
+-- kinda don't like it but not gonna chuck it yet, got a nice hip hop bent
 d1 $ overlay ((1 ~>) $ s "sn/2") $ morek $ s "k"
