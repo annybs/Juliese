@@ -83,9 +83,6 @@ d1 $ overlay ((1 ~>) $ s "cy/8") $
 d2 $ whenmod 16 15 (density 3) $ hhb True
 d2 $ (# pan (density 16 "0.25 0.75")) $ whenmod 16 15 (density 3) $ hhb True
 
-d1 $ overlay ((1 ~>) $ s "cy/8") $
-  overlay ((0.5 ~>) $ s "sn/2") $ morek $ s "k"
-
 d2 $ iter 4 $ (# pan (density 16 "0.25 0.75")) $ whenmod 16 15 (density 3) $ hhb True
 d1 $ overlay ((0.5 ~>) $ s "sn/2") $ morek $ s "k"
 
