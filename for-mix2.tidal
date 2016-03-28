@@ -1,314 +1,183 @@
+{-
+anny's wicked funky new song
+totally not banging
+just funky
+woo woo
+
+i shouldn't drink before i comment code
+
+http://anny.audio
+-}
+
 cps (99/60)
-
 let every' n o f = when ((== (o-1)) . (`mod` n)) f
-
 hush
 
-d3 $
-  s "[[vb vb:1] ~]/2"
-  # speed (slow 2.5 "1 -1")
-  # vowel "e o"
+{-
+some defs cause i'm starting to lose track of all the copy pasta
+and fuck up my function ordering and gains
 
-d3 $
-  s "[[vb vb:1] ~]/2"
-  # end (slow 1.4 "0.2 0.4")
---  # speed (slow 2.5 "1 -1") -- not this, but don't delete it. comes back
-  # vowel "e o"
+n.b. cutgroup denotes channel e.g. cut "4" == d4
+-}
 
-d2 $
-  smash 16 [0.25, 0.5] $
-  s "hh hh:2"
-  # gain "0.6"
+-- bass template
+let bassbass = s "[[vb vb:1] ~]/2"
+               # end (slow 1.4 "0.2 0.4")
+               # vowel "e o"
 
+let bassbass' = bassbass # speed (slow 2.5 "1 -1")
+
+-- lay more k over 4tf k
+let morek = every' 8 8 (overlay $ (0.32 ~>) $ s "k*2")
+
+-- final main drum loop, for reference
+-- n.b. DO NOT copy such shit all over the place like you did with piston, you ass
+let drum1'f = overlay ((0.5 ~>) $ s "sn/2") $ every' 12 2 (density 3) $ morek $ s "k"
+
+-- basic hats
+let hhb m = smash 16 [0.25, 0.5] $
+            (if m then (every 3 (append $ s "hh:1 hh")) else id) $
+            s "hh hh:2"
+            # gain "0.6"
+
+-- udu
+let ududu = slow 4 . chop 128 $
+            s (samples "udu" (slow 4 $ irand 4))
+            # gain "0.8"
+            # cut "6"
+
+-- guitar (i think)
+let eg g = gap 128 $ s "eg*2"
+           # gain g
+           # cut "4"
+
+-- other guitar
+let gt g = chop 128 $ s "[gt [~ gt] ! ~]/2"
+           # gain g
+           # cut "5"
+
+let pcbeep = slow 16 $ gap 48 $ s "pc:1"
+             # gain "0.7"
+             # cut "7"
+             # speed "[1 0.7]"
+
+{-
+here goes i guess
+-}
+
+d3 $ bassbass
+d2 $ hhb False
+d3 $ bassbass'
 d1 $ s "k"
 
-d3 $
-  s "[[vb vb:1] ~]/2"
-  # end (slow 1.4 "0.2 0.4")
-  # speed (slow 2.5 "1 -1")
-  # vowel "e o"
+d1 $ morek $ s "k"
+d2 $ whenmod 16 15 (density 3) $ hhb False
 
-d1 $ every' 8 8 (overlay $ (0.32 ~>) $ s "k*2") $ s "k"
+d1 $ overlay ((0.5 ~>) $ s "sn/2") $ morek $ s "k"
+d3 $ whenmod 3 2 (slow 2) $ bassbass'
+d3 $ whenmod 4 2 (density 3) $ whenmod 3 2 (slow 2) $ bassbass'
 
-d2 $
-  whenmod 16 15 (density 3) $
-  smash 16 [0.25, 0.5] $
-  s "hh hh:2"
-  # gain "0.6"
+d1 $ overlay ((1 ~>) $ s "cy/8") $
+  overlay ((0.5 ~>) $ s "sn/2") $ morek $ s "k"
 
-d1 $ stack [
-  every' 8 8 (overlay $ (0.32 ~>) $ s "k*2") $ s "k",
-  (0.5 ~>) $ s "sn/2"
-  ]
+d2 $ whenmod 16 15 (density 3) $ hhb True
+d2 $ (# pan (density 16 "0.25 0.75")) $ whenmod 16 15 (density 3) $ hhb True
 
-d3 $
-  whenmod 3 2 (slow 2) $
-  s "[[vb vb:1] ~]/2"
-  # end (slow 1.4 "0.2 0.4")
-  # speed (slow 2.5 "1 -1")
-  # vowel "e o"
+d1 $ overlay ((1 ~>) $ s "cy/8") $
+  overlay ((0.5 ~>) $ s "sn/2") $ every' 12 2 (density 3) $ morek $ s "k"
 
-d3 $
-  whenmod 3 2 (slow 2) $
-  (whenmod 4 2 $ density 3) $
-  s "[[vb vb:1] ~]/2"
-  # end (slow 1.4 "0.2 0.4")
-  # speed (slow 2.5 "1 -1")
-  # vowel "e o"
+d2 $ iter 4 $ (# pan (density 16 "0.25 0.75")) $ whenmod 16 15 (density 3) $ hhb True
+d1 $ overlay ((0.5 ~>) $ s "sn/2") $ every' 12 2 (density 3) $ morek $ s "k"
 
-d1 $ stack [
-  (1 ~>) $ s "cy/8",
-  every' 8 8 (overlay $ (0.32 ~>) $ s "k*2") $ s "k",
-  (0.5 ~>) $ s "sn/2"
-  ]
+d6 $ ududu
 
-d2 $
-  whenmod 16 15 (density 3) $
-  smash 16 [0.25, 0.5] $
-  every 3 (append $ s "hh:1 hh") $
-  s "hh hh:2"
-  # gain "0.6"
+-- fade up to gain 0.8
+d4 $ density 0.25 $ eg "0.8"
 
-d1 $ stack [
-  (1 ~>) $ s "cy/8",
-  every' 8 8 (overlay $ (0.32 ~>) $ s "k*2") $
-  every' 12 2 (density 3) $
-  s "k",
-  (0.5 ~>) $ s "sn/2"
-  ]
+d4 $ (# speed ((+0.8).(/2) <$> slow 4 saw1)) $
+  density 0.25 $ eg "0.8"
 
-d1 $ stack [
-  every' 8 8 (overlay $ (0.32 ~>) $ s "k*2") $
-  every' 12 2 (density 3) $
-  s "k",
-  (0.5 ~>) $ s "sn/2"
-  ]
-
-d2 $
-  iter 4 $
-  (# pan (density 16 "0.25 0.75")) $
-  whenmod 16 15 (density 3) $
-  smash 16 [0.25, 0.5] $
-  every 3 (append $ s "hh:1 hh") $
-  s "hh hh:2"
-  # gain "0.6"
-
-d6 $
-  slow 4 . chop 128 $
-  s (samples "udu" (slow 4 $ irand 4))
-  # gain "0.8"
-  # cut "6"
-
-d4 $
+d4 $ (# speed ((+0.8).(/2) <$> slow 4 saw1)) $
   density 0.25 $
-  gap 128 $ s "eg*2"
-  # gain "0.8" -- fade up to 0.8
-  # cut "4"
+  slowspread density [1, 2, 0.5, 2] $ eg "0.8"
 
-d4 $
-  (# speed ((+0.8).(/2) <$> slow 4 saw1)) $
-  density 0.25 $
-  gap 128 $ s "eg*2"
-  # gain "0.8"
-  # cut "4"
+d6 $ (every' 3 2 . sometimesBy 0.5 $ density (4%3)) $ ududu
 
-d4 $
-  (# speed ((+0.8).(/2) <$> slow 4 saw1)) $
-  density 0.25 $
-  slowspread density [1, 2, 0.5, 2] $
-  gap 128 $ s "eg*2"
-  # gain "0.8"
-  # cut "4"
+d4 $ (# speed ((+0.8).(/2) <$> slow 4 saw1)) $
+  density 0.245 $ -- !
+  slowspread density [1, 2, 0.5, 2] $ eg "0.8"
 
-d6 $
-  (whenmod 3 2 . sometimesBy 0.5 $ density (4%3)) $
-  slow 4 . chop 128 $
-  s (samples "udu" (slow 4 $ irand 4))
-  # gain "0.8"
-  # cut "6"
-
-d4 $
-  (# speed ((+0.8).(/2) <$> slow 4 saw1)) $
-  density 0.245 $
-  slowspread density [1, 2, 0.5, 2] $
-  gap 128 $
-  s "eg*2"
-  # gain "0.8"
-  # cut "4"
-
-d1 $ stack [
-  (1 ~>) $ s "cy/8",
-  every' 8 8 (overlay $ (0.32 ~>) $ s "k*2") $
-  every' 12 2 (density 3) $
-  s "k",
-  (0.5 ~>) $ s "sn/2"
-  ]
+d1 $ overlay ((1 ~>) $ s "cy/8") $
+  overlay ((0.5 ~>) $ s "sn/2") $ every' 12 2 (density 3) $ morek $ s "k"
 
 mapM_ ($ silence) [d2,d3]
 
-d4 $
-  (0.18 <~) $ every 2 (const silence) $
+-- fuck yeah. const rules
+d4 $ (0.18 <~) $ every 2 (const silence) $
   (# speed ((+0.8).(/2) <$> slow 4 saw1)) $
   density 0.245 $
-  slowspread density [1, 2, 0.5, 2] $
-  gap 128 $ s "eg*2"
-  # gain "0.8"
-  # cut "4"
+  slowspread density [1, 2, 0.5, 2] $ eg "0.8"
 
-d1 $ stack [
-  every' 8 8 (overlay $ (0.32 ~>) $ s "k*2") $
-  every' 12 2 (density 3) $
-  s "k",
-  (0.5 ~>) $ s "sn/2"
-  ]
+d1 $ overlay ((0.5 ~>) $ s "sn/2") $ every' 12 2 (density 3) $ morek $ s "k"
 
-d7 $
-  slow 16 $ gap 48 $ s "pc:1"
-  # gain "0.7"
-  # cut "7"
-  # speed "[1 0.7]"
+d7 $ pcbeep
+d7 $ slowspread (\x -> within x (slow 2)) [(0.25, 0.5), (0.75, 1), (0.25, 0.75)] $ pcbeep
 
-d7 $
-  slowspread ($) [id, slow 2] $
-  slow 16 $ gap 48 $ s "pc:1"
-  # gain "0.7"
-  # cut "7"
-  # speed "[1 0.7]"
+d6 $ (every' 3 2 . sometimesBy 0.5 $ density (4%3)) $
+  (whenmod 7 5 $ trunc (5%6)) $ ududu
 
-d6 $
+d6 $ (every' 5 3 $ brak) $
   (every' 3 2 . sometimesBy 0.5 $ density (4%3)) $
-  (whenmod 7 5 $ trunc (5%6)) $
-  slow 4 . chop 128 $
-  s (samples "udu" (slow 4 $ irand 4))
-  # gain "0.8"
-  # cut "6"
+  (whenmod 7 5 $ trunc (5%6)) $ ududu
 
-d7 $
-  slowspread ($) [id, slow 2] $
-  slow 16 $ gap 48 $ s "[pc pc:1]"
-  # gain "0.7"
-  # cut "7"
-  # speed "[1 0.7]"
+d7 $ slowspread ($) [rev, id, brak, (0.25 ~>), id] $
+  slowspread (\x -> within x (slow 2)) [(0.25, 0.5), (0.75, 1), (0.25, 0.75)] $ pcbeep
 
-d6 $
-  (every' 5 3 $ brak) $
-  (every' 3 2 . sometimesBy 0.5 $ density (4%3)) $
-  (whenmod 7 5 $ trunc (5%6)) $
-  slow 4 . chop 128 $
-  s (samples "udu" (slow 4 $ irand 4))
-  # gain "0.8"
-  # cut "6"
-
-d7 $
+d7 $ whenmod 7 5 (density 1.25) $
   slowspread ($) [rev, id, brak, (0.25 ~>), id] $
-  slowspread ($) [id, slow 2] $
-  slow 16 $ gap 48 $ s "[pc pc:1]"
-  # gain "0.7"
-  # cut "7"
-  # speed "[1 0.7]"
+  slowspread (\x -> within x (slow 2)) [(0.25, 0.5), (0.75, 1), (0.25, 0.75)] $ pcbeep
 
-d5 $
-  chop 128 $ s "[gt [~ gt] ! ~]/2"
-  # gain "0.8" -- fade up to 0.8
-  # cut "5"
+d3 $ whenmod 4 2 (density 3) $ whenmod 3 2 (slow 2) $ bassbass'
 
-d5 $
-  chop 128 $ s "[gt [~ gt] ! ~]/2"
-  # gain "0.8" -- fade up to 0.8
-  # cut "5"
-  # speed ((+1).(/4) <$> slow 1.95 sinewave1)
-
-d7 $
-  whenmod 7 5 (density 1.25) $
-  slowspread ($) [rev, id, brak, (0.25 ~>), id] $
-  slowspread ($) [id, slow 2] $
-  slow 16 $ gap 48 $ s "[pc pc:1]"
-  # gain "0.7"
-  # cut "7"
-  # speed "[1 0.7]"
-
-d5 $
-  density 0.98 $
-  chop 128 $ s "[gt [~ gt] ! ~]/2"
-  # gain "0.8"
-  # cut "5"
-  # speed ((+1).(/4) <$> slow 1.95 sinewave1)
-
-d3 $
-  (whenmod 3 2 $ slow 2) $
-  (whenmod 4 2 $ density 3) $
-  s "[[vb vb:1] ~]/2"
-  # end (slow 1.4 "0.2 0.4")
-  # speed (slow 2.5 "1 -1")
-  # vowel "e o"
-
-d4 $
-  (0.18 <~) $
+d4 $ (0.18 <~) $ --every 2 (const silence) $
   (# speed ((+0.8).(/2) <$> slow 4 saw1)) $
   density 0.245 $
-  slowspread density [1, 2, 0.5, 2] $
-  gap 128 $ s "eg*2"
-  # gain "0.8"
-  # cut "4"
+  slowspread density [1, 2, 0.5, 2] $ eg "0.8"
 
-d3 $
-  within (0.5, 1) (slow (4%3) . brak) $
-  (whenmod 4 2 $ density 3) $
-  (whenmod 3 2 $ slow 2) $
-  s "[[vb vb:1] ~]/2"
-  # end (slow 1.4 "0.2 0.4")
-  # speed (slow 2.5 "1 -1")
-  # vowel "e o"
+-- fade up to 0.75 (or 0.8? used to be 0.8 but its pretty loud)
+d5 $ gt "0.75"
+
+-- funkier bassline w slowspread lambda, thanks yaxu. thaxu
+d3 $ slowspread (\x -> within (0.5, 1) (x)) [id, slow 2 . brak] $
+  whenmod 4 2 (density 3) $ whenmod 3 2 (slow 2) $ bassbass'
+
+d5 $ gt "0.75"
+  # speed ((+1).(/4) <$> slow 1.95 sinewave1)
+
+d5 $ density 0.98 $ gt "0.75"
+  # speed ((+1).(/4) <$> slow 1.95 sinewave1)
+
+d2 $ iter 4 $ (# pan (density 16 "0.25 0.75")) $ whenmod 16 15 (density 3) $ hhb True
 
 d1 $ stack [
-  every' 8 7 (overlay $ (0.32 ~>) $ s "k") $
-  s "[k ~ k*2 ~]/4",
-  every' 16 16 (overlay $ (0.82 ~>) $ s "sn") $
-  (1 ~>) $ s "sn/2"
+  every' 8 7 (overlay $ (0.32 ~>) $ s "k") $ s "[k ~ k*2 ~]/4",
+  every' 16 16 (overlay $ (0.82 ~>) $ s "sn") $ (1 ~>) $ s "sn/2"
   ]
 
-d4 silence
+mapM_ ($ silence) [d4,d5]
 
 d8 $ slow 16 . gap 64 $ s "pclow"
-  # gain "0.86"
-
-{-
-d1 $ stack [
-  every' 8 8 (overlay $ (0.32 ~>) $ s "k*2") $
-  s "k",
-  (1 ~>) $ s "sn/2"
-  ]
--}
-
-d3 $
-  whenmod 3 2 (slow 2) $
-  (whenmod 4 2 $ density 3) $
-  s "[[vb vb:1] ~]/2"
-  # end (slow 1.4 "0.2 0.4")
-  # speed (slow 2.5 "1 -1")
-  # vowel "e o"
-
-d5 silence
-
-d7 $
-  stut 4 0.8 0.5 $
-  whenmod 7 5 (density 1.25) $
-  slowspread ($) [rev, id, brak, (0.25 ~>), id] $
-  slowspread ($) [id, slow 2] $
-  slow 16 $ gap 48 $ s "[pc pc:1]"
-  # gain "0.7"
-  # cut "7"
-  # speed "[1 0.7]"
-
-d2 $
-  iter 4 $
-  (# pan (density 16 "0.25 0.75")) $
-  whenmod 16 15 (density 3) $
-  smash 16 [0.25, 0.5] $
-  every 3 (append $ s "hh:1 hh") $
-  s "hh hh:2"
-  # gain "0.6"
+  # gain "0.8"
 
 mapM_ ($ silence) [d6,d7]
+d2 silence
 
 hush
+
+{-
+scratch area to keep stuff that's interesting but maybe doesn't fit in
+-}
+
+-- totally different drum line, feelwise. even though it's nearly the same
+-- kinda don't like it but not gonna chuck it yet
+d1 $ overlay ((1 ~>) $ s "sn/2") $ morek $ s "k"
