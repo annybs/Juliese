@@ -128,7 +128,7 @@ d'eg $ (0.18 <~) $ every 2 (const silence) $
 
 d'drum $ overlay ((0.5 ~>) $ s "sn/2") $ morek $ s "k"
 d'udu $ (every' 3 2 . sometimesBy 0.5 $ density (4%3)) $ ududu
-d'drum $ overlay ((0.5 ~>) $ s "sn/2") $ every' 12 2 (density 3) $ morek $ s "k"
+d'drum $ overlay ((0.5 ~>) $ s "sn/2") $ morek $ every' 12 2 (density 3) $ s "k"
 
 d'pc $ pcbeep
 d'pc $ slowspread (\x -> within x (slow 1.5)) [(0.25, 0.5), (0.75, 1), (0.25, 0.75)] $ pcbeep
