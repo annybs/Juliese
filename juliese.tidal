@@ -66,22 +66,23 @@ here goes i guess
 
 hush
 
+d'drum $ s "k"
 d'bass $ bassbass
 d'perc $ hhb False
 d'bass $ bassbass'
-d'drum $ s "k"
 
 d'drum $ morek $ s "k"
-d'perc $ whenmod 16 15 (density 3) $ hhb False
+d'perc $ hhb True
+d'perc $ whenmod 16 15 (density 3) $ hhb True
 
 d'drum $ overlay ((0.5 ~>) $ s "sn/2") $ morek $ s "k"
-d'bass $ whenmod 3 2 (slow 2) $ bassbass'
-d'bass $ whenmod 4 2 (density 3) $ whenmod 3 2 (slow 2) $ bassbass'
 
 d'drum $ overlay ((1 ~>) $ s "cy/8") $
   overlay ((0.5 ~>) $ s "sn/2") $ morek $ s "k"
 
-d'perc $ whenmod 16 15 (density 3) $ hhb True
+d'bass $ whenmod 3 2 (slow 2) $ bassbass'
+d'bass $ whenmod 4 2 (density 3) $ whenmod 3 2 (slow 2) $ bassbass'
+
 d'perc $ (# pan (density 16 "0.25 0.75")) $ whenmod 16 15 (density 3) $ hhb True
 
 d'perc $ iter 4 $ (# pan (density 16 "0.25 0.75")) $ whenmod 16 15 (density 3) $ hhb True
@@ -92,13 +93,13 @@ d'udu $ ududu
 d'wbass $ chop 16 $ s "[wb wb:1 ~ ~]/4" # gain "0.9"
 d'wbass $ chop 16 $ s "[wb [wb:1 wb:2] ~ ~]/4" # gain "0.9"
 
+d'wbass $ every' 4 4 (0.32 ~>) $ chop 16 $ s "[wb [wb:1 wb:2] ~ [wb:1 wb:2]]/4" # gain "0.9"
+
 d'eg $ density 0.25 $ eg
   # gain "0.8"
 
-d'wbass $ every' 4 4 (0.32 ~>) $ chop 16 $ s "[wb [wb:1 wb:2] ~ [wb:1 wb:2]]/4" # gain "0.9"
-
-d'eg $ (# speed ((+0.8).(/2) <$> slow 4 saw1)) $
-  density 0.25 $ eg
+d'eg $
+  slowspread density [1, 2, 0.5, 2] $ eg
   # gain "0.8"
 
 d'eg $ (# speed ((+0.8).(/2) <$> slow 4 saw1)) $
@@ -114,9 +115,6 @@ d'eg $ (# speed ((+0.8).(/2) <$> slow 4 saw1)) $
   slowspread density [1, 2, 0.5, 2] $ eg
   # gain "0.8"
 
-d'drum $ overlay ((1 ~>) $ s "cy/8") $
-  overlay ((0.5 ~>) $ s "sn/2") $ morek $ s "k"
-
 mapM_ ($ silence) [d'perc, d'bass]
 
 -- fuck yeah. const rules
@@ -126,7 +124,6 @@ d'eg $ (0.18 <~) $ every 2 (const silence) $
   slowspread density [1, 2, 0.5, 2] $ eg
   # gain "0.8"
 
-d'drum $ overlay ((0.5 ~>) $ s "sn/2") $ morek $ s "k"
 d'udu $ (every' 3 2 . sometimesBy 0.5 $ density (4%3)) $ ududu
 d'drum $ overlay ((0.5 ~>) $ s "sn/2") $ morek $ every' 12 2 (density 3) $ s "k"
 
@@ -160,8 +157,6 @@ d'wbass $ (sometimesBy 0.6 $ superimpose (rev . slow (5%4))) $
 
 d'perc $ iter 4 $ (# pan (density 16 "0.25 0.75")) $ whenmod 16 15 (density 3) $ hhb True
 
-d'bass $ whenmod 4 2 (density 3) $ whenmod 3 2 (slow 2) $ bassbass'
-
 -- funkier bassline w slowspread lambda, thanks yaxu. thaxu
 d'bass $ slowspread (\x -> within (0.5, 1) (x)) [id, slow 2 . brak] $
   whenmod 4 2 (density 3) $ whenmod 3 2 (slow 2) $ bassbass'
@@ -181,13 +176,12 @@ d'gt $ density 0.98 $ gt
   # gain "0.87"
   # speed ((+1).(/4) <$> slow 1.95 sinewave1)
 
-mapM_ ($ silence) [d'eg, d'wbass]
-
 let ju'drum2 = stack [
                every' 8 7 (overlay $ (0.32 ~>) $ s "k") $ s "[k ~ k*2 ~]/4",
                every' 16 16 (overlay $ (0.82 ~>) $ s "sn") $ (1 ~>) $ s "sn/2"
                ]
 
+mapM_ ($ silence) [d'eg, d'wbass]
 d'drum $ ju'drum2
 
 d'pcl $ slow 16 . gap 64 $ s "pclow"
@@ -205,5 +199,4 @@ mapM_ ($ silence) [d'bass, d'udu, d'pc]
 d'pcl $ slow 16 . gap 64 $ s "pclow"
   # gain "0.8"
 
-mapM_ ($ silence) [d'perc, d'gt]
 hush
