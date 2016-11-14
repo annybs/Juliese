@@ -20,7 +20,7 @@ let d'drum = d1
     d'wbass = d9
 
 -- bass template
-let bassbass = s "[[vb vb:1] ~]/2"
+let bassbass = sound "[[vb vb:1] ~]/2"
                # end (slow 1.4 "0.2 0.4")
                # vowel "e o"
 
@@ -35,13 +35,13 @@ let drum1'f = overlay ((0.5 ~>) $ s "sn/2") $ every' 12 2 (density 3) $ morek $ 
 
 -- basic hats
 let hhb m = smash 16 [0.25, 0.5] $
-            (if m then (every 3 (append $ s "hh:1 hh")) else id) $
-            s "hh hh:2"
+            (if m then (every 3 (append $ sound "hh:1 hh")) else id) $
+            sound "hh hh:2"
             # gain "0.6"
 
 -- udu
 let ududu = slow 4 . chop 128 $
-            s (samples "udu" (slow 4 $ irand 4))
+            sound (samples "udu" (slow 4 $ irand 4))
             # gain "0.8"
             # cut "6"
 
@@ -55,7 +55,7 @@ let gt = every 2 (within (0, 0.5) (0.07 <~)) $ (0.07 ~>) $
          s "[gt [~ gt] ! ~]/2"
          # cut "5"
 
-let pcbeep = slow 16 $ gap 48 $ s "pc:1"
+let pcbeep = slow 16 $ gap 48 $ sound "pc:1"
              # gain "0.7"
              # cut "7"
              # speed "[1 0.7]"
@@ -90,10 +90,10 @@ d'drum $ overlay ((0.5 ~>) $ s "sn/2") $ morek $ s "k"
 
 d'udu $ ududu
 
-d'wbass $ chop 16 $ s "[wb wb:1 ~ ~]/4" # gain "0.9"
-d'wbass $ chop 16 $ s "[wb [wb:1 wb:2] ~ ~]/4" # gain "0.9"
+d'wbass $ chop 16 $ sound "[wb wb:1 ~ ~]/4" # gain "0.9"
+d'wbass $ chop 16 $ sound "[wb [wb:1 wb:2] ~ ~]/4" # gain "0.9"
 
-d'wbass $ every' 4 4 (0.32 ~>) $ chop 16 $ s "[wb [wb:1 wb:2] ~ [wb:1 wb:2]]/4" # gain "0.9"
+d'wbass $ every' 4 4 (0.32 ~>) $ chop 16 $ sound "[wb [wb:1 wb:2] ~ [wb:1 wb:2]]/4" # gain "0.9"
 
 d'eg $ density 0.25 $ eg
   # gain "0.8"
@@ -107,7 +107,7 @@ d'eg $ (# speed ((+0.8).(/2) <$> slow 4 saw1)) $
   slowspread density [1, 2, 0.5, 2] $ eg
   # gain "0.8"
 
-d'wbass $ every' 4 4 (0.32 ~>) $ chop 16 $ s "[wb [wb:1 wb:2] ~ [wb:1 wb:2]]/4" # gain "0.9"
+d'wbass $ every' 4 4 (0.32 ~>) $ chop 16 $ sound "[wb [wb:1 wb:2] ~ [wb:1 wb:2]]/4" # gain "0.9"
   # speed "[1 1 2]/3"
 
 d'eg $ (# speed ((+0.8).(/2) <$> slow 4 saw1)) $
@@ -136,7 +136,7 @@ d'udu $ (every' 3 2 . sometimesBy 0.5 $ density (4%3)) $
 d'pc $ slowspread ($) [rev, id, brak, (0.25 ~>), id] $
   slowspread (\x -> within x (slow 1.5)) [(0.25, 0.5), (0.75, 1), (0.25, 0.75)] $ pcbeep
 
-d'wbass $ every' 4 4 (0.32 ~>) $ chop 16 $ s "[wb [wb:1 wb:2] ~ [[wb:1 wb:1/2] wb:2]]/4" # gain "0.9"
+d'wbass $ every' 4 4 (0.32 ~>) $ chop 16 $ sound "[wb [wb:1 wb:2] ~ [[wb:1 wb:1/2] wb:2]]/4" # gain "0.9"
   # speed "[1 1 2]/3"
 
 d'pc $ whenmod 7 5 (density 1.25) $
@@ -152,7 +152,7 @@ d'gt $ gt
 
 -- OOOOOOHHHH MY FUCK
 d'wbass $ (sometimesBy 0.6 $ superimpose (rev . slow (5%4))) $
-  every' 4 4 (0.32 ~>) $ chop 16 $ s "[wb [wb:1 wb:2] ~ [[wb:1 wb:1/2] wb:2]]/4" # gain "0.9"
+  every' 4 4 (0.32 ~>) $ chop 16 $ sound "[wb [wb:1 wb:2] ~ [[wb:1 wb:1/2] wb:2]]/4" # gain "0.9"
   # speed "[1 1 2]/3"
 
 d'perc $ iter 4 $ (# pan (density 16 "0.25 0.75")) $ whenmod 16 15 (density 3) $ hhb True
