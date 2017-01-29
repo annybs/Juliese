@@ -72,10 +72,10 @@ d'perc $ hhb False
 d'bass $ bassbass'
 
 d'drum $ morek $ s "k"
-d'perc $ hhb True
-d'perc $ whenmod 16 15 (density 3) $ hhb True
-
+d'perc $ whenmod 16 15 (density 3) $ hhb False
 d'drum $ overlay ((0.5 ~>) $ s "sn/2") $ morek $ s "k"
+
+d'perc $ whenmod 16 15 (density 3) $ hhb True
 
 d'drum $ overlay ((1 ~>) $ s "cy/8") $
   overlay ((0.5 ~>) $ s "sn/2") $ morek $ s "k"
