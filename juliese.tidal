@@ -1,6 +1,12 @@
 {-
-anny: juliese
-to be performed at leeds algorave, 29th april 2016
+Anny: Juliese
+anny.audio
+
+Current version: 1.0
+Compatibility: Tidal Cycles 1.0-dev + SuperDirt 1.0-dev + SuperCollider 3.8
+License: CC-BY-SA https://creativecommons.org/licenses/by-sa/4.0/
+
+See README.md for more information
 -}
 
 let bpm b = cps (b/60)
