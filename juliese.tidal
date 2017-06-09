@@ -42,7 +42,7 @@ d'bass $
   # vowel "e o"
   -- # speed (slow 2.5 "1 -1") -- (1)
 
--- ~jdrum @ 1
+-- jdrum @ 1
 
 -- @jperc
 d'perc $
@@ -54,19 +54,19 @@ d'perc $
   sound "hh hh:2"
   # gain 0.6
 
--- ~jbass @ 1
--- ~jperc @ 1
--- ~jdrum @ 2
+-- jbass @ 1
+-- jperc @ 1
+-- jdrum @ 2
 
--- ~jperc @ 2
--- ~jdrum @ 3
+-- jperc @ 2
+-- jdrum @ 3
 
--- ~jbass @ 2
--- ~jperc @ 3
+-- jbass @ 2
+-- jperc @ 3
 
--- ~jdrum @ 4
--- ~jbass @ 3
--- ~jperc @ 4
+-- jdrum @ 4
+-- jbass @ 3
+-- jperc @ 4
 
 -- @judu
 d'udu $
@@ -89,8 +89,8 @@ d'wbass $ -- (sometimesBy 0.6 $ superimpose (rev . slow (5/4))) $ -- (5)
   # gain 0.9
   -- # speed "[1 1 2]/3" -- (3)
 
--- ~jwbass @ 1
--- ~jwbass @ 2
+-- jwbass @ 1
+-- jwbass @ 2
 
 -- @jeg
 d'eg $ -- (0.18 <~) $ -- (4)
@@ -102,16 +102,16 @@ d'eg $ -- (0.18 <~) $ -- (4)
   # cut 4
   # gain 0.8
 
--- ~jeg @ 1
--- ~jeg @ 2
--- ~jwbass @ 3
--- ~jeg @ 3
+-- jeg @ 1
+-- jeg @ 2
+-- jwbass @ 3
+-- jeg @ 3
 
 msil [d'perc, d'bass]
 
--- ~jeg @ 4
--- ~judu @ 1
--- ~jdrum @ 5
+-- jeg @ 4
+-- judu @ 1
+-- jdrum @ 5
 
 -- @jpc
 d'pc $
@@ -123,13 +123,13 @@ d'pc $
   # cut 7
   # speed "[1 0.7]"
 
--- ~jpc @ 1
--- ~judu @ 2
+-- jpc @ 1
+-- judu @ 2
 
--- ~jpc @ 2
+-- jpc @ 2
 
--- ~jwbass @ 4
--- ~jpc @ 3
+-- jwbass @ 4
+-- jpc @ 3
 
 -- @jgt
 d'gt $ -- density 0.98 $ -- (2)
@@ -140,16 +140,16 @@ d'gt $ -- density 0.98 $ -- (2)
   # gain 0.87
   -- # speed (scale 1 1.25 $ slow 1.95 sinewave1) -- (1)
 
--- ~jgt @ 1
+-- jgt @ 1
 
--- ~jwbass @ 5
--- ~jperc @ 4
+-- jwbass @ 5
+-- jperc @ 4
 
--- ~jbass @ 4
--- ~judu @ 3
--- ~jeg @ 5
+-- jbass @ 4
+-- judu @ 3
+-- jeg @ 5
 
--- ~jgt @ 2
+-- jgt @ 2
 
 msil [d'eg, d'wbass]
 
@@ -165,11 +165,11 @@ d'pcl $ -- superimpose (slow (10/9) . rev) $ -- (1)
   # gain 0.8
   -- # speed "1 1.5" -- (2)
 
--- ~jpcl @ 1
--- ~jpcl @ 2
+-- jpcl @ 1
+-- jpcl @ 2
 
 msil [d'bass, d'udu, d'pc]
 
--- ~jpcl @ 0
+-- jpcl @ 0
 
 hush
