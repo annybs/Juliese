@@ -5,8 +5,8 @@
 # expand-env: (yas-indent-line fixed)
 # --
 -- @jdrum
-d'drum $ -- overlay ((1 ~>) $ s "cy/8") $ -- (3), (4) remove
-  -- overlay ((0.5 ~>) $ s "sn/2") $ -- (2)
-  -- every' 8 8 (overlay $ (0.32 ~>) $ s "k*2") $ -- (1)
+d'drum $ -- overlay ((1 ~>) $ s "${3:cy}/8") $ -- (3), (4) remove
+  -- overlay ((0.5 ~>) $ s "${2:sn}/2") $ -- (2)
+  -- every' 8 8 (overlay $ (0.32 ~>) $ s "$1*2") $ -- (1)
   -- every' 12 2 (density 3) $ -- (5)
-  s "k"
+  s "${1:k}"

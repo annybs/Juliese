@@ -10,6 +10,6 @@ d'perc $
   -- (# pan (density 16 "0.25 0.75")) $ -- (3)
   -- whenmod 16 15 (density 3) $ -- (1)
   smash 16 [0.25, 0.5] $
-  -- every 3 (append $ sound "hh:1 hh") $ -- (2)
-  sound "hh hh:2"
+  -- every 3 (append $ sound "$1:1 $1") $ -- (2)
+  sound "${1:hh} $1:2"
   # gain 0.6

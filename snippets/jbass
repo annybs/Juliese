@@ -9,7 +9,7 @@ d'bass $
   -- slowspread (\x -> within (0.5, 1) (x)) [id, slow 2 . brak] $ -- (4)
   -- whenmod 4 2 (density 3) $ -- (3)
   -- whenmod 3 2 (slow 2) $ -- (2)
-  sound "[[vb vb:1] ~]/2"
+  sound "[[${1:vb} $1:1] ~]/2"
   # end (slow 1.4 "0.2 0.4")
   # vowel "e o"
   -- # speed (slow 2.5 "1 -1") -- (1)

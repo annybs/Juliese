@@ -10,6 +10,6 @@ d'udu $
   -- (every' 3 2 . sometimesBy 0.5 $ density (4/3)) $ -- (1)
   -- (whenmod 7 5 $ trunc (5/6)) $ -- (2)
   slow 4 . chop 128 $
-  sound (samples "udu" (slow 4 $ irand 4))
+  sound (samples "${1:udu}" (slow 4 $ irand 4))
   # gain 0.8
   # cut 6

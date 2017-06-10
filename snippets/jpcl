@@ -6,6 +6,6 @@
 # --
 -- @jpcl
 d'pcl $ -- superimpose (slow (10/9) . rev) $ -- (1)
-  slow 16 . gap 64 $ s "pclow"
+  slow 16 . gap 64 $ s "${1:pclow}"
   # gain 0.8
   -- # speed "1 1.5" -- (2)
