@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: jeg
+# group: juliese
+# key: jeg
+# expand-env: (yas-indent-line fixed)
+# --
+-- @jeg
+d'eg $ -- (0.18 <~) $ -- (4)
+  -- every 2 (const silence) $ -- (4), (5) remove
+  -- (# speed (scale 0.8 1.3 $ slow 4 saw1)) $ -- (2)
+  density 0.25 $ -- (3) 0.245
+  -- slowspread density [1, 2, 0.5, 2] $ -- (1)
+  gap 128 $ s "eg*2"
+  # cut 4
+  # gain 0.8

@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: jpc
+# group: juliese
+# key: jpc
+# expand-env: (yas-indent-line fixed)
+# --
+-- @jpc
+d'pc $
+  -- whenmod 7 5 (density 1.25) $ -- (3)
+  -- slowspread ($) [rev, id, brak, (0.25 ~>), id] $ -- (2)
+  -- slowspread (\x -> within x (slow 1.5)) [(0.25, 0.5), (0.75, 1), (0.25, 0.75)] $ -- (1)
+  slow 16 $ gap 48 $ sound "pc:1"
+  # gain 0.7
+  # cut 7
+  # speed "[1 0.7]"

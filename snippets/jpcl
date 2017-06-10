@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: jpcl
+# group: juliese
+# key: jpcl
+# expand-env: (yas-indent-line fixed)
+# --
+-- @jpcl
+d'pcl $ -- superimpose (slow (10/9) . rev) $ -- (1)
+  slow 16 . gap 64 $ s "pclow"
+  # gain 0.8
+  -- # speed "1 1.5" -- (2)

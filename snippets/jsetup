@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: jsetup
+# group: juliese
+# key: jsetup
+# expand-env: (yas-indent-line fixed)
+# --
+let bpm b = cps (b/60)
+    every' n o f = when ((== (o-1)) . (\`mod\` n)) f
+    msil = mapM_ ($ silence)
+    d'drum = d1
+    d'perc = d2
+    d'bass = d3
+    d'eg = d4
+    d'gt = d5
+    d'udu = d6
+    d'pc = d7
+    d'pcl = d8
+    d'wbass = d9

@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: jwbass
+# group: juliese
+# key: jwbass
+# expand-env: (yas-indent-line fixed)
+# --
+-- @jwbass
+d'wbass $ -- (sometimesBy 0.6 $ superimpose (rev . slow (5/4))) $ -- (5)
+  -- every' 4 4 (0.32 ~>) $ -- (2)
+  chop 16 $
+  sound "[wb wb:1 ~ ~]/4"
+  -- sound "[wb [wb:1 wb:2] ~ ~]/4" -- (1)
+  -- sound "[wb [wb:1 wb:2] ~ [wb:1 wb:2]]/4" -- (2)
+  -- sound "[wb [wb:1 wb:2] ~ [[wb:1 wb:1/2] wb:2]]/4" -- (4)
+  # gain 0.9
+  -- # speed "[1 1 2]/3" -- (3)
