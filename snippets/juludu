@@ -1,10 +1,10 @@
 # -*- mode: snippet -*-
-# name: judu
+# name: juludu
 # group: juliese
-# key: judu
+# key: juludu
 # expand-env: (yas-indent-line fixed)
 # --
--- @judu
+-- @juludu
 d'udu $
   -- (every' 5 3 $ brak) $ -- (3)
   -- (every' 3 2 . sometimesBy 0.5 $ density (4/3)) $ -- (1)

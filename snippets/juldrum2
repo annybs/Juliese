@@ -1,10 +1,10 @@
 # -*- mode: snippet -*-
-# name: jdrum2
+# name: juldrum2
 # group: juliese
-# key: jdrum2
+# key: juldrum2
 # expand-env: (yas-indent-line fixed)
 # --
--- @jdrum2
+-- @juldrum2
 d'drum $ stack [
   every' 8 7 (overlay $ (0.32 ~>) $ s "${1:k}") $ s "[$1 ~ $1*2 ~]/4",
   every' 16 16 (overlay $ (0.82 ~>) $ s "${2:sn}") $ (1 ~>) $ s "$2/2"

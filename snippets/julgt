@@ -1,10 +1,10 @@
 # -*- mode: snippet -*-
-# name: jgt
+# name: julgt
 # group: juliese
-# key: jgt
+# key: julgt
 # expand-env: (yas-indent-line fixed)
 # --
--- @jgt
+-- @julgt
 d'gt $ -- density 0.98 $ -- (2)
   every 2 (within (0, 0.5) (0.07 <~)) $ (0.07 ~>) $
   chop 128 $

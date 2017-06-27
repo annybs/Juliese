@@ -1,12 +1,12 @@
 # -*- mode: snippet -*-
-# name: jperc
+# name: julperc
 # group: juliese
-# key: jperc
+# key: julperc
 # expand-env: (yas-indent-line fixed)
 # --
--- @jperc
+-- @julperc
 d'perc $
-  -- iter 4 $ -- (4)
+  -- iter 5 $ -- (4)
   -- (# pan (density 16 "0.25 0.75")) $ -- (3)
   -- whenmod 16 15 (density 3) $ -- (1)
   smash 16 [0.25, 0.5] $

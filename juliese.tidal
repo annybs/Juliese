@@ -25,14 +25,14 @@ let bpm b = cps (b/60)
 bpm 99
 hush
 
--- @jdrum
+-- @juldrum
 d'drum $ -- overlay ((1 ~>) $ s "cy/8") $ -- (3), (4) remove
   -- overlay ((0.5 ~>) $ s "sn/2") $ -- (2)
   -- every' 8 8 (overlay $ (0.32 ~>) $ s "k*2") $ -- (1)
   -- every' 12 2 (density 3) $ -- (5)
   s "k"
 
--- @jbass
+-- @julbass
 d'bass $
   -- slowspread (\x -> within (0.5, 1) (x)) [id, slow 2 . brak] $ -- (4)
   -- whenmod 4 2 (density 3) $ -- (3)
@@ -42,11 +42,11 @@ d'bass $
   # vowel "e o"
   -- # speed (slow 2.5 "1 -1") -- (1)
 
--- jdrum @ 1
+-- juldrum @ 1
 
--- @jperc
+-- @julperc
 d'perc $
-  -- iter 4 $ -- (4)
+  -- iter 5 $ -- (4)
   -- (# pan (density 16 "0.25 0.75")) $ -- (3)
   -- whenmod 16 15 (density 3) $ -- (1)
   smash 16 [0.25, 0.5] $
@@ -54,21 +54,21 @@ d'perc $
   sound "hh hh:2"
   # gain 0.6
 
--- jbass @ 1
--- jperc @ 1
--- jdrum @ 2
+-- julbass @ 1
+-- julperc @ 1
+-- juldrum @ 2
 
--- jperc @ 2
--- jdrum @ 3
+-- julperc @ 2
+-- juldrum @ 3
 
--- jbass @ 2
--- jperc @ 3
+-- julbass @ 2
+-- julperc @ 3
 
--- jdrum @ 4
--- jbass @ 3
--- jperc @ 4
+-- juldrum @ 4
+-- julbass @ 3
+-- julperc @ 4
 
--- @judu
+-- @juludu
 d'udu $
   -- (every' 5 3 $ brak) $ -- (3)
   -- (every' 3 2 . sometimesBy 0.5 $ density (4/3)) $ -- (1)
@@ -78,7 +78,7 @@ d'udu $
   # gain 0.8
   # cut 6
 
--- @jwbass
+-- @julwbass
 d'wbass $ -- (sometimesBy 0.6 $ superimpose (rev . slow (5/4))) $ -- (5)
   -- every' 4 4 (0.32 ~>) $ -- (2)
   chop 16 $
@@ -89,10 +89,10 @@ d'wbass $ -- (sometimesBy 0.6 $ superimpose (rev . slow (5/4))) $ -- (5)
   # gain 0.9
   -- # speed "[1 1 2]/3" -- (3)
 
--- jwbass @ 1
--- jwbass @ 2
+-- julwbass @ 1
+-- julwbass @ 2
 
--- @jeg
+-- @juleg
 d'eg $ -- (0.18 <~) $ -- (4)
   -- every 2 (const silence) $ -- (4), (5) remove
   -- (# speed (scale 0.8 1.3 $ slow 4 saw1)) $ -- (2)
@@ -102,18 +102,18 @@ d'eg $ -- (0.18 <~) $ -- (4)
   # cut 4
   # gain 0.8
 
--- jeg @ 1
--- jeg @ 2
--- jwbass @ 3
--- jeg @ 3
+-- juleg @ 1
+-- juleg @ 2
+-- julwbass @ 3
+-- juleg @ 3
 
 msil [d'perc, d'bass]
 
--- jeg @ 4
--- judu @ 1
--- jdrum @ 5
+-- juleg @ 4
+-- juludu @ 1
+-- juldrum @ 5
 
--- @jpc
+-- @julpc
 d'pc $
   -- whenmod 7 5 (density 1.25) $ -- (3)
   -- slowspread ($) [rev, id, brak, (0.25 ~>), id] $ -- (2)
@@ -123,15 +123,15 @@ d'pc $
   # cut 7
   # speed "[1 0.7]"
 
--- jpc @ 1
--- judu @ 2
+-- julpc @ 1
+-- juludu @ 2
 
--- jpc @ 2
+-- julpc @ 2
 
--- jwbass @ 4
--- jpc @ 3
+-- julwbass @ 4
+-- julpc @ 3
 
--- @jgt
+-- @julgt
 d'gt $ -- density 0.98 $ -- (2)
   every 2 (within (0, 0.5) (0.07 <~)) $ (0.07 ~>) $
   chop 128 $
@@ -140,36 +140,36 @@ d'gt $ -- density 0.98 $ -- (2)
   # gain 0.87
   -- # speed (scale 1 1.25 $ slow 1.95 sinewave1) -- (1)
 
--- jgt @ 1
+-- julgt @ 1
 
--- jwbass @ 5
--- jperc @ 4
+-- julwbass @ 5
+-- julperc @ 4
 
--- jbass @ 4
--- judu @ 3
--- jeg @ 5
+-- julbass @ 4
+-- juludu @ 3
+-- juleg @ 5
 
--- jgt @ 2
+-- julgt @ 2
 
 msil [d'eg, d'wbass]
 
--- @jdrum2
+-- @juldrum2
 d'drum $ stack [
   every' 8 7 (overlay $ (0.32 ~>) $ s "k") $ s "[k ~ k*2 ~]/4",
   every' 16 16 (overlay $ (0.82 ~>) $ s "sn") $ (1 ~>) $ s "sn/2"
   ]
 
--- @jpcl
+-- @julpcl
 d'pcl $ -- superimpose (slow (10/9) . rev) $ -- (1)
   slow 16 . gap 64 $ s "pclow"
   # gain 0.8
   -- # speed "1 1.5" -- (2)
 
--- jpcl @ 1
--- jpcl @ 2
+-- julpcl @ 1
+-- julpcl @ 2
 
 msil [d'bass, d'udu, d'pc]
 
--- jpcl @ 0
+-- julpcl @ 0
 
 hush

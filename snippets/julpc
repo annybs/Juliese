@@ -1,10 +1,10 @@
 # -*- mode: snippet -*-
-# name: jpc
+# name: julpc
 # group: juliese
-# key: jpc
+# key: julpc
 # expand-env: (yas-indent-line fixed)
 # --
--- @jpc
+-- @julpc
 d'pc $
   -- whenmod 7 5 (density 1.25) $ -- (3)
   -- slowspread ($) [rev, id, brak, (0.25 ~>), id] $ -- (2)

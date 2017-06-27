@@ -1,10 +1,10 @@
 # -*- mode: snippet -*-
-# name: jdrum
+# name: juldrum
 # group: juliese
-# key: jdrum
+# key: juldrum
 # expand-env: (yas-indent-line fixed)
 # --
--- @jdrum
+-- @juldrum
 d'drum $ -- overlay ((1 ~>) $ s "${3:cy}/8") $ -- (3), (4) remove
   -- overlay ((0.5 ~>) $ s "${2:sn}/2") $ -- (2)
   -- every' 8 8 (overlay $ (0.32 ~>) $ s "$1*2") $ -- (1)

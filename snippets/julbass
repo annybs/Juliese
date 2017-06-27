@@ -1,10 +1,10 @@
 # -*- mode: snippet -*-
-# name: jbass
+# name: julbass
 # group: juliese
-# key: jbass
+# key: julbass
 # expand-env: (yas-indent-line fixed)
 # --
--- @jbass
+-- @julbass
 d'bass $
   -- slowspread (\x -> within (0.5, 1) (x)) [id, slow 2 . brak] $ -- (4)
   -- whenmod 4 2 (density 3) $ -- (3)

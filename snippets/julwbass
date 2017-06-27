@@ -1,10 +1,10 @@
 # -*- mode: snippet -*-
-# name: jwbass
+# name: julwbass
 # group: juliese
-# key: jwbass
+# key: julwbass
 # expand-env: (yas-indent-line fixed)
 # --
--- @jwbass
+-- @julwbass
 d'wbass $ -- (sometimesBy 0.6 $ superimpose (rev . slow (5/4))) $ -- (5)
   -- every' 4 4 (0.32 ~>) $ -- (2)
   chop 16 $

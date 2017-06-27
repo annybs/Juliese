@@ -1,7 +1,7 @@
 # -*- mode: snippet -*-
-# name: jsetup
+# name: julsetup
 # group: juliese
-# key: jsetup
+# key: julsetup
 # expand-env: (yas-indent-line fixed)
 # --
 let bpm b = cps (b/60)
